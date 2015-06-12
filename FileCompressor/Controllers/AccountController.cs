@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -49,7 +50,16 @@ namespace FileCompressor.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    DirectoryInfo directory = new DirectoryInfo(Server.MapPath(@"~\App_Data\Images"));
+                    var files = directory.GetFiles().ToList();
+                    if (files.Count != 0)
+                    {
+                        return RedirectToAction("ShowUploadedFiles", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("UploadFile", "Home");
+                    }
                 }
                 else
                 {
@@ -207,7 +217,7 @@ namespace FileCompressor.Controllers
             if (user != null)
             {
                 await SignInAsync(user, isPersistent: false);
-                return RedirectToLocal(returnUrl);
+                return RedirectToAction("UploadFile", "Home");
             }
             else
             {
@@ -273,7 +283,7 @@ namespace FileCompressor.Controllers
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToAction("UploadFile", "Home");
                     }
                 }
                 AddErrors(result);
@@ -362,18 +372,6 @@ namespace FileCompressor.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             Error
-        }
-
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("UploadFile", "Home");
-            }
         }
 
         private class ChallengeResult : HttpUnauthorizedResult

@@ -13,22 +13,14 @@ namespace FileCompressor.Controllers
     {
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("ShowUploadedFiles");
+            }
+            
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
 
         [Authorize]
         public ActionResult UploadFile()
@@ -39,7 +31,7 @@ namespace FileCompressor.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> UploadHomeReport(string id)
+        public async Task<ActionResult> UploadFile(string id)
         {
             try
             {
@@ -63,10 +55,25 @@ namespace FileCompressor.Controllers
             catch (Exception)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return Json("Upload failed");
+                //return Json("Upload failed");
             }
 
-            return Json("File uploaded successfully");
+            return RedirectToAction("ShowUploadedFiles");
+        }
+
+        public ActionResult ShowUploadedFiles()
+        {
+            DirectoryInfo directory = new DirectoryInfo(Server.MapPath(@"~\App_Data\Images"));
+            var files = directory.GetFiles().ToList();
+
+            return View(files);
+        }
+
+        public ActionResult ShowImage(string id)
+        {
+            var dir = Server.MapPath(@"~\App_Data\Images");
+            var path = Path.Combine(dir, id);
+            return base.File(path, "image/jpeg");
         }
     }
 }
