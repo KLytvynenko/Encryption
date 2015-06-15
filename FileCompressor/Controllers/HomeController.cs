@@ -15,7 +15,7 @@ namespace FileCompressor.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return RedirectToAction("ShowUploadedFiles");
+                return RedirectToAction("UploadFile");
             }
             
             return View();
@@ -66,7 +66,7 @@ namespace FileCompressor.Controllers
             DirectoryInfo directory = new DirectoryInfo(Server.MapPath(@"~\App_Data\Images"));
             var files = directory.GetFiles().ToList();
 
-            return View(files);
+            return View("UploadFile", files);
         }
 
         public ActionResult ShowImage(string id)

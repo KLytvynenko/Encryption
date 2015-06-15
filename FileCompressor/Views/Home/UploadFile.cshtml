@@ -1,4 +1,5 @@
-﻿
+﻿@model List<FileInfo>
+
 @{
     ViewBag.Title = "UploadFile";
 }
@@ -10,10 +11,15 @@
     <input type="submit" name="Submit" id="Submit" value="Upload" />
 }
 
-@if (File.Exists("~/App_Data/Images"))
+@if (Model != null)
 {
-    
+    foreach (var file in Model)
+    {
+        <b>@Html.ActionLink(file.ToString(), "ShowImage", new { id = file.Name })</b>
+        <br>
+    }
 }
+
 
 <script>
     $('#txtUploadFile').on('change', function (e) {
