@@ -31,7 +31,7 @@ namespace FileCompressor.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> UploadFile(string id)
+        public Task<ActionResult> UploadFile(string id)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace FileCompressor.Controllers
                         // get a stream
                         var stream = fileContent.InputStream;
                         // and optionally write the file to disk
-                        var fileName = Path.GetFileName(file);
+                        string fileName = Path.GetFileName(file) + Guid.NewGuid();
                         var path = Path.Combine(Server.MapPath("~/App_Data/Images"), fileName);
                         using (var fileStream = System.IO.File.Create(path))
                         {
