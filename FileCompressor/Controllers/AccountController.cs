@@ -93,7 +93,7 @@ namespace FileCompressor.Controllers
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("UploadFile", "Home");
+                    return RedirectToAction("ShowUploadedFiles","Home");
                 }
                 else
                 {

@@ -15,7 +15,7 @@ namespace FileCompressor.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return RedirectToAction("UploadFile");
+                return ShowUploadedFiles();
             }
             
             return View();
