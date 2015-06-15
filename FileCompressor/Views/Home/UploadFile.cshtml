@@ -1,14 +1,9 @@
 ﻿@model List<FileInfo>
 
-
-<!DOCTYPE html>
-<html>
-<head>
     @{
         ViewBag.Title = "UploadFile";
     }
-</head>
-<body>
+
 <h2>UploadFile</h2>
 @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
@@ -23,8 +18,7 @@
         <br>
     }
 }
-</body>
-</html>
+
 
 @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
