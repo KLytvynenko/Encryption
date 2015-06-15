@@ -229,11 +229,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Documents\Visual Studio 2013\Projects\ConsoleApplication7\Contracts\Contracts.csproj">
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{08f007be-b889-40f2-a4e8-60330ef2c2d5}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Documents\Visual Studio 2013\Projects\ConsoleApplication7\Service\Service.csproj">
+    <ProjectReference Include="..\Service\Service.csproj">
       <Project>{3fa5abda-fee9-4d5e-9652-701b1180a33a}</Project>
       <Name>Service</Name>
     </ProjectReference>
