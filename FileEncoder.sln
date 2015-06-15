@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileEncoder", "FileCompressor\FileEncoder.csproj", "{98D2755B-F22B-4EE2-965F-73459FC736EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "..\..\..\Documents\Visual Studio 2013\Projects\ConsoleApplication7\Contracts\Contracts.csproj", "{08F007BE-B889-40F2-A4E8-60330EF2C2D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "..\..\..\Documents\Visual Studio 2013\Projects\ConsoleApplication7\Service\Service.csproj", "{3FA5ABDA-FEE9-4D5E-9652-701B1180A33A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{98D2755B-F22B-4EE2-965F-73459FC736EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98D2755B-F22B-4EE2-965F-73459FC736EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98D2755B-F22B-4EE2-965F-73459FC736EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08F007BE-B889-40F2-A4E8-60330EF2C2D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08F007BE-B889-40F2-A4E8-60330EF2C2D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08F007BE-B889-40F2-A4E8-60330EF2C2D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08F007BE-B889-40F2-A4E8-60330EF2C2D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FA5ABDA-FEE9-4D5E-9652-701B1180A33A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FA5ABDA-FEE9-4D5E-9652-701B1180A33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FA5ABDA-FEE9-4D5E-9652-701B1180A33A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FA5ABDA-FEE9-4D5E-9652-701B1180A33A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

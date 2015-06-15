@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Service;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
@@ -11,6 +11,9 @@ namespace FileCompressor.Controllers
 {
     public class HomeController : Controller
     {
+        EncryptionService encryptionService = new EncryptionService();
+        string _imagePath = "~/App_Data/Images";
+
         public ActionResult Index()
         {
             if (Request.IsAuthenticated)
@@ -31,31 +34,25 @@ namespace FileCompressor.Controllers
         }
 
         [HttpPost]
-        public Task<ActionResult> UploadFile(string id)
+        public ActionResult UploadFile(string id)
         {
             try
             {
                 foreach (string file in Request.Files)
                 {
                     var fileContent = Request.Files[file];
-                    if (fileContent != null && fileContent.ContentLength > 0)
+                    if (fileContent!= null && fileContent.ContentLength > 0)
                     {
-                        // get a stream
-                        var stream = fileContent.InputStream;
-                        // and optionally write the file to disk
-                        string fileName = Path.GetFileName(file) + Guid.NewGuid();
-                        var path = Path.Combine(Server.MapPath("~/App_Data/Images"), fileName);
-                        using (var fileStream = System.IO.File.Create(path))
-                        {
-                            stream.CopyTo(fileStream);
-                        }
+                        string fileName = Path.GetFileNameWithoutExtension(fileContent.FileName);
+                        var path = Path.Combine(Server.MapPath(_imagePath), fileName);
+                        //TODO: write your keyUserId
+                        encryptionService.EncryptFile("keyUserId", fileContent.InputStream, path);
                     }
                 }
             }
             catch (Exception)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                //return Json("Upload failed");
             }
 
             return RedirectToAction("ShowUploadedFiles");
@@ -63,17 +60,17 @@ namespace FileCompressor.Controllers
 
         public ActionResult ShowUploadedFiles()
         {
-            DirectoryInfo directory = new DirectoryInfo(Server.MapPath(@"~\App_Data\Images"));
-            var files = directory.GetFiles().ToList();
-
+            DirectoryInfo directory = new DirectoryInfo(Server.MapPath(_imagePath));
+            IEnumerable<FileInfo> files = directory.GetFiles();
             return View("UploadFile", files);
         }
 
+        //On proof of concept version we can only encrypt image file
         public ActionResult ShowImage(string id)
         {
-            var dir = Server.MapPath(@"~\App_Data\Images");
+            var dir = Server.MapPath(_imagePath);
             var path = Path.Combine(dir, id);
-            return base.File(path, "image/jpeg");
+            return File(encryptionService.DecryptFile(path).ToArray(), "image/jpeg");
         }
     }
 }
